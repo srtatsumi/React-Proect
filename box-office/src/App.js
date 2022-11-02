@@ -1,21 +1,22 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Navs from './components/Navs';
+import Home from './pages/Home';
+import Page404 from './pages/Page404';
+import Starred from './pages/Starred';
 
 function App() {
   return (
-    <div>
-      <Navs />
-      <Switch>
-        <Route exact path="/">
-          This is a homepage
-        </Route>
-        <Route exact path="/login">
-          This is a login page
-        </Route>
-        <Route>This is 404 page</Route>
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/starred">
+        <Starred />
+      </Route>
+      <Route>
+        <Page404 />
+      </Route>
+    </Switch>
   );
 }
 
