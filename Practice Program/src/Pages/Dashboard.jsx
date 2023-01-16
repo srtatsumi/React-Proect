@@ -1,24 +1,22 @@
 // eslint-disable-next-line
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import useValidateUser from "../Hook/useValidateUser";
-import { auth } from "../App";
+import useValidateUser from "../Hook/useValidateUser";
 
 const Dashboard = () => {
   const Navigate = useNavigate();
-  // const [loading, isauthenticated] = useValidateUser();
-  // useEffect(() => {
-  //   if (!loading && !isauthenticated) {
-  //     Navigate("/login");
-  //   }
-  //   console.log("Check", isauthenticated);
-  // }, [isauthenticated]);
+  const [authenticated, loading, isauthenticated] = useValidateUser();
+  useEffect(() => {
+    if (!isauthenticated && authenticated === null) {
+      window.alert("You are not logged in! Please Login");
+      Navigate("/login");
+    }
+  }, [Navigate, authenticated, isauthenticated, loading]);
 
-  // if (loading) {
-  //   return <p>Loading....</p>;
-  // }
-  const contextType = auth;
-  console.log(contextType._currentValue);
+  if (loading) {
+    return <p>Loading....</p>;
+  }
+
   return (
     <>
       Dashboard

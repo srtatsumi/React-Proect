@@ -1,11 +1,12 @@
 // eslint-disable-next-line
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const Navigate = useNavigate();
   const [input, setInput] = useState("");
   const [password, setPassword] = useState("");
-  // const [token,setToken]=useState('user-token')
 
   const updateInputValue = (e) => {
     setInput(e);
@@ -28,6 +29,7 @@ const Login = () => {
           ) {
             localStorage.setItem("authenticated", response.data["user-token"]);
             alert("You have been logged in successfully!!");
+            Navigate("/dashboard");
           }
         })
         .catch(function (error) {
