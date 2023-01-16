@@ -2,11 +2,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useValidateUser from "../Hook/useValidateUser";
 
 const Login = () => {
   const Navigate = useNavigate();
   const [input, setInput] = useState("");
   const [password, setPassword] = useState("");
+
+  const [authenticated, loading, isauthenticated] = useValidateUser();
+  useEffect(() => {
+    if (isauthenticated && authenticated !== null) {
+      window.alert("You are already logged in!");
+      Navigate("/dashboard");
+    }
+  }, [Navigate, authenticated, isauthenticated, loading]);
+
+  if (loading) {
+    if (isauthenticated || authenticated !== null) {
+      return <p>Loading....</p>;
+    }
+  }
 
   const updateInputValue = (e) => {
     setInput(e);
